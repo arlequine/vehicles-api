@@ -2,28 +2,22 @@ const express = require('express')
 const mongoose = require('mongoose')
 const router = express.Router()
 
-const { vehiclesController } = require('../controllers')
+const { routeController } = require('../controllers')
 
-const { getVehicles, vehicleFilter , createVehicle, updateVehicle, deleteVehicle } = vehiclesController
+const { getRoute, createRoute, updateRoute, deleteRoute } = routeController
 
 router.get('/', async (req, res) => {
-    const vehicles = await getVehicles()
-    res.send(vehicles)
-})
-
-router.get('/:brand', async (req, res) => {
-    console.log(req.params)
-    const getVehicleBrand = vehicleFilter(req.params)
-    res.send(getVehicleBrand)
+    const geoRoute = await getRoute()
+    res.send(geoRoute)
 })
   
 router.post('/', async (req, res) => {
     const body = req.body
 
     try {
-        const newVehicle = await createVehicle(body)
+        const newGeoRoute = await createRoute(body)
         res.status(201)
-        res.send(newVehicle)
+        res.send(newGeoRoute)
     } catch (error) {
         if (error instanceof mongoose.Error.ValidationError) {
             res.status(400)
@@ -42,21 +36,21 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     const { id } = req.params
     const body = req.body
-    const vehicle = await updateVehicle(id, body)
+    const geoRoute = await updateRoute(id, body)
 
-    if (!vehicle) {
+    if (!geoRoute) {
         res.status(404)
         return res.send({
-        message: `El vehiculo con id: ${id}, no se encuentra`
+        message: `No existe ruta asignada`
         })
     }
-    res.send(vehicle)
+    res.send(geoRoute)
 })
 
 router.delete('/:id', async (req, res) => {
     const { id } = req.params
 
-    const result = await deleteVehicle(id)
+    const result = await deleteRoute(id)
 
     res.send(result)
 })

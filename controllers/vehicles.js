@@ -4,6 +4,11 @@ const getVehicles = async () => {
     return VehicleModel.find({})
 }
 
+const vehicleFilter = async (params) => {
+    console.log('params',params)
+    return VehicleModel.find(params)
+}
+
 const createVehicle = async (body) => {
     const newVehicle = new VehicleModel(body)
     newVehicle.save()
@@ -23,6 +28,7 @@ const deleteVehicle = async (_id) => {
 
 module.exports = {
     getVehicles,
+    vehicleFilter,
     createVehicle,
     updateVehicle,
     deleteVehicle

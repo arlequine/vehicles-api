@@ -4,7 +4,7 @@ require('dotenv').config()
 const cors = require('cors')
 require('./db/mongodb')
 const apiRouter = require('./apis')
-const port = 3000
+const port = 3001
 
 app.use(express.json())
 app.use(cors())
