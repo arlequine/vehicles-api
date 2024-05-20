@@ -5,8 +5,8 @@ const getVehicles = async () => {
 }
 
 const vehicleFilter = async (params) => {
-    console.log('params',params)
-    return VehicleModel.find(params)
+    const result = await VehicleModel.find({brand: `${params.brand}`})
+    return result
 }
 
 const createVehicle = async (body) => {

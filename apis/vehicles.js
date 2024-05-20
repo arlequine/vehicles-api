@@ -12,8 +12,8 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:brand', async (req, res) => {
-    console.log(req.params)
-    const getVehicleBrand = vehicleFilter(req.params)
+    const getVehicleBrand = await vehicleFilter(req.params)
+    console.log(getVehicleBrand)
     res.send(getVehicleBrand)
 })
   
