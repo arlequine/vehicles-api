@@ -5,7 +5,7 @@ const getVehicles = async () => {
 }
 
 const vehicleFilter = async (params) => {
-    const result = await VehicleModel.find({brand: `${params.brand}`})
+    const result = await VehicleModel.find({brand: new RegExp(params.brand, 'i')})
     return result
 }
 
